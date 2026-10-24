@@ -50,7 +50,7 @@ export function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   useEffect(() => {
     const el = ref.current; if (!el) return;
     const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
+      if (!e?.isIntersecting) return;
       io.disconnect();
       const start = performance.now();
       const step = (t: number) => {
