@@ -12,4 +12,7 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Vercel sets VERCEL=1 at build time: build the Vercel serverless output there.
+  // Lovable's own build/publish never sets it, so that target stays untouched.
+  ...(process.env["VERCEL"] ? { nitro: { preset: "vercel" } } : {}),
 });
