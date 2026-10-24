@@ -215,7 +215,7 @@ function MenuAdmin() {
   };
   return (
     <div>
-      <button className={`${btn} mb-4 bg-primary text-primary-foreground`} onClick={() => setEdit({ category: CATEGORIES[0], name: "", description: "", price: 0, photo_url: null, active: true, sort: rows.length + 1 })}><Plus className="h-4 w-4" />Novo item</button>
+      <button className={`${btn} mb-4 bg-primary text-primary-foreground`} onClick={() => setEdit({ category: CATEGORIES[0]!, name: "", description: "", price: 0, photo_url: null, active: true, sort: rows.length + 1 })}><Plus className="h-4 w-4" />Novo item</button>
       {edit && (
         <div className="mb-6 grid gap-3 rounded-2xl border border-gold/50 bg-card p-5 sm:grid-cols-2">
           <label className="grid gap-1 text-sm">Categoria<select className={input} value={edit.category} onChange={(e) => setEdit({ ...edit, category: e.target.value })}>{CATEGORIES.map((c) => <option key={c}>{c}</option>)}</select></label>

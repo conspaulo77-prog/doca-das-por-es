@@ -86,7 +86,7 @@ export function Quiz() {
   const [step, setStep] = useState(0);
   const [score, setScore] = useState<string[]>([]);
   const done = step >= QUIZ.length;
-  const winner = done ? Object.entries(score.reduce<Record<string, number>>((m, k) => ({ ...m, [k]: (m[k] || 0) + 1 }), {})).sort((a, b) => b[1] - a[1])[0][0] : "";
+  const winner = done ? Object.entries(score.reduce<Record<string, number>>((m, k) => ({ ...m, [k]: (m[k] || 0) + 1 }), {})).sort((a, b) => b[1] - a[1])[0]![0] : "";
   return (
     <Section id="quiz" eyebrow="Teste rápido e saboroso" title={<>Qual porção <span className="text-gold-gradient">combina com você?</span></>}>
       <div className="reveal mx-auto max-w-xl rounded-3xl border border-gold/40 bg-card p-6 shadow-glow md:p-8">
@@ -94,9 +94,9 @@ export function Quiz() {
           <div key={step} className="animate-rise">
             <p className="mb-1 text-xs font-bold text-muted-foreground">Pergunta {step + 1} de {QUIZ.length}</p>
             <div className="mb-5 h-1.5 overflow-hidden rounded-full bg-secondary"><div className="h-full bg-gold-gradient transition-all" style={{ width: `${(step / QUIZ.length) * 100}%` }} /></div>
-            <h3 className="mb-5 text-2xl">{QUIZ[step].q}</h3>
+            <h3 className="mb-5 text-2xl">{QUIZ[step]!.q}</h3>
             <div className="grid gap-3">
-              {QUIZ[step].a.map(([label, key]) => (
+              {QUIZ[step]!.a.map(([label, key]) => (
                 <button key={label} onClick={() => { setScore([...score, key]); setStep(step + 1); }} className="rounded-xl border border-border bg-secondary px-4 py-3 text-left font-semibold transition hover:border-gold hover:bg-primary active:scale-95">{label}</button>
               ))}
             </div>
@@ -104,9 +104,9 @@ export function Quiz() {
         ) : (
           <div className="animate-rise text-center">
             <p className="text-sm text-muted-foreground">Sua porção ideal é...</p>
-            <h3 className="my-3 text-3xl text-gold neon">{RESULT[winner].name}</h3>
-            <p className="mb-6 text-foreground/90">{RESULT[winner].text}</p>
-            <a href={waUrl(`Fiz o quiz no site e deu ${RESULT[winner].name}! Quero pedir 😋`)} target="_blank" rel="noreferrer" className="inline-block rounded-xl bg-primary px-6 py-3 font-bold text-primary-foreground">Pedir no WhatsApp</a>
+            <h3 className="my-3 text-3xl text-gold neon">{RESULT[winner]!.name}</h3>
+            <p className="mb-6 text-foreground/90">{RESULT[winner]!.text}</p>
+            <a href={waUrl(`Fiz o quiz no site e deu ${RESULT[winner]!.name}! Quero pedir 😋`)} target="_blank" rel="noreferrer" className="inline-block rounded-xl bg-primary px-6 py-3 font-bold text-primary-foreground">Pedir no WhatsApp</a>
             <button onClick={() => { setStep(0); setScore([]); }} className="mt-3 block w-full text-sm text-muted-foreground underline">Refazer quiz</button>
           </div>
         )}
