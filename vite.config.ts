@@ -12,4 +12,8 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // On Vercel (VERCEL is set there at build time) build the Vercel serverless
+  // output. Everywhere else — Lovable's own build/publish — leave the default
+  // target in place so nothing about the Lovable hosting changes.
+  nitro: process.env.VERCEL ? { preset: "vercel" } : undefined,
 });
